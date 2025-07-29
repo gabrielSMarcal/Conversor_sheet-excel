@@ -80,10 +80,26 @@ def read_excel_file(file_path, output_csv_path):
     return table
 
 
+def csv_to_xlsx(input_csv_path, output_xlsx_path):
+    wb = openpyxl.Workbook()
+    ws = wb.active
+
+    with open(input_csv_path, mode="r", encoding="utf-8") as csv_file:
+        reader = csv.reader(csv_file, delimiter=",")
+        for row in reader:
+            ws.append(row)
+
+    wb.save(output_xlsx_path)
+
+
 def main():
     file_path = "teste.xlsx"
-    output_csv_path = "output_teste.csv"
+    output_csv_path = "teste.csv"
     read_excel_file(file_path, output_csv_path)
+
+    # input_csv_path = "teste.csv"
+    # output_xlsx_path = "teste.xlsx"
+    # csv_to_xlsx(input_csv_path, output_xlsx_path)
 
 if __name__ == "__main__":
     main()
